@@ -1,30 +1,20 @@
-#include <stdio.h>
+#include "main.h"
+
+/**
+ * _puts_recursion - prints a string, followed by a new line
+ * @s: pointer to the string
+ * Return: void
+ */
 
 void _puts_recursion(char *s)
 {
-  if (*s == '\0')
-    {
-      printf("\n");
-      /**
-       *Base case:
-       *when we reach the end of the string ('\0'), print a new line
-       *and return
-       */
-      return;
-    }
-  /**
-   *print the current character and move to thr next character in the string
-   *recursively call _puts_recursion with the rest of the string
-   *
-   */
-
-  printf("%c", *s);
-  _puts_recursion(s + 1);
-}
-
-int main()
-{
-  char *s = "Hello, World!";
-  _puts_recursion(s);
-  return 0;
+	if (*s == '\0')
+	{
+		_putchar('\n');
+	}
+	else
+	{
+		_putchar(*s);
+		_puts_recursion(s + 1);
+	}
 }
