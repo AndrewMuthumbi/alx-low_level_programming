@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+/**
+ * ABS - Macro to compute the absolute value of a number.
+ * @x: The number to compute the absolute value of.
+ *
+ * Description: This macro computes the absolute value of a number 'x'.
+ *              If 'x' is negative, it returns the negation of 'x',
+ *              otherwise, it returns 'x' itself.
+ *
+ * Return: The absolute value of 'x'.
+ */
+
+#define ABS(x) ((x) < 0 ? -(x) : (x))
+
+int main(void)
+{
+int num = -10;
+
+/* Example usage of ABS macro */
+printf("Absolute value of %d is %d\n", num, ABS(num));
+
+return 0;
+}
