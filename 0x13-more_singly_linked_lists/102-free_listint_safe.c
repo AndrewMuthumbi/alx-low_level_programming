@@ -1,15 +1,16 @@
 #include "lists.h"
+#include <stdio.h>
 
 /**
- * free_listint_safe - Frees a listint_t linked list
- * @h: Pointer to a pointer to the head of the list
- *
- * Return: The size of the list that was freed
- */
+* free_listint_safe - Frees a listint_t linked list safely
+* @h: A pointer to the address of the head of the list
+*
+* Return: The size of the list that was freed
+*/
 size_t free_listint_safe(listint_t **h)
 {
-listint_t *current, *next_node;
-size_t count = 0;
+size_t node_count = 0;
+listint_t *current, *temp;
 
 if (h == NULL || *h == NULL)
 return (0);
@@ -17,17 +18,19 @@ return (0);
 current = *h;
 while (current != NULL)
 {
-next_node = current->next;
-free(current);
-count++;
-if (next_node >= current)
+node_count++;
+temp = current;
+current = current->next;
+free(temp);
+
+/* Check if the current node points back to a previously visited node */
+if (temp <= current)
 {
 *h = NULL;
-return (count);
+break;
 }
-current = next_node;
 }
 
 *h = NULL;
-return (count);
+return (node_count);
 }
