@@ -1,6 +1,5 @@
 section .data
     msg db "Hello, Holberton", 10, 0  ; string to print, including newline character
-    msg_len equ $ - msg               ; length of the message
 
 section .text
     global main
@@ -13,7 +12,7 @@ main:
     mov rax, 1      ; system call number (write)
     mov rdi, 1      ; file descriptor (stdout)
     mov rsi, msg    ; pointer to the message
-    mov rdx, msg_len; message length
+    mov rdx, 17     ; message length (without null terminator)
     syscall        ; make the system call
 
     ; Restore the stack and return
