@@ -1,14 +1,22 @@
 section .data
-    format db 'Hello, Holberton', 10, 0  ; Null-terminated string with newline character
+    msg db "Hello, Holberton", 10, 0  ; string to print, including newline character
+    msg_len equ $ - msg               ; length of the message
 
 section .text
-    global _start
-    extern printf
+    global main
 
-_start:
-    mov rdi, format
-    call printf
+main:
+    push rbp
+    mov rbp, rsp
 
-    mov rax, 60
-    xor rdi, rdi
-    syscall
+    ; Set up the arguments for the write system call
+    mov rax, 1      ; system call number (write)
+    mov rdi, 1      ; file descriptor (stdout)
+    mov rsi, msg    ; pointer to the message
+    mov rdx, msg_len; message length
+    syscall        ; make the system call
+
+    ; Restore the stack and return
+    pop rbp
+    xor rax, rax    ; return value of 0
+    ret
